@@ -11,7 +11,27 @@
  * @returns {number} the price of the pizza
  */
 export function pizzaPrice(pizza, ...extras) {
-  throw new Error('Please implement the pizzaPrice function');
+  let total = 0;
+  switch (pizza) {
+    case "Margherita":
+      total = 7;
+      break;
+    case "Caprese":
+      total = 9;
+      break;
+    case "Formaggio":
+      total = 10;
+      break;
+  }
+  for (let i = 0; i < extras.length; i++) {
+    if (extras[i] === "ExtraSauce") {
+      total = total + 1;
+    }
+    if (extras[i] === "ExtraToppings") {
+      total = total + 2;
+    }
+  }
+  return total;
 }
 
 /**
