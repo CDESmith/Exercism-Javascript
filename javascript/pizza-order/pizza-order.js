@@ -2,6 +2,14 @@
 //
 // @ts-check
 
+const PRICES = {
+  Margherita: 7,
+  Caprese: 9,
+  Formaggio:10,
+  ExtraSauce: 1,
+  ExtraTopping: 2,
+};
+
 /**
  * Determine the price of the pizza given the pizza and optional extras
  *
@@ -11,27 +19,8 @@
  * @returns {number} the price of the pizza
  */
 export function pizzaPrice(pizza, ...extras) {
-  let total = 0;
-  switch (pizza) {
-    case "Margherita":
-      total = 7;
-      break;
-    case "Caprese":
-      total = 9;
-      break;
-    case "Formaggio":
-      total = 10;
-      break;
-  }
-  for (let i = 0; i < extras.length; i++) {
-    if (extras[i] === "ExtraSauce") {
-      total = total + 1;
-    }
-    if (extras[i] === "ExtraToppings") {
-      total = total + 2;
-    }
-  }
-  return total;
+  if(!extras || extras.length === 0) return PRICES[pizza];
+  return PRICES[extras.shift()] + pizzaPrice(pizza, ...extras);
 }
 
 /**
