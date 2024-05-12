@@ -3,12 +3,12 @@
 // @ts-check
 
 const PRICES = {
-  Margherita: 7,
-  Caprese: 9,
-  Formaggio:10,
-  ExtraSauce: 1,
-  ExtraTopping: 2,
-};
+  'Margherita': 7,
+  'Caprese': 9,
+  'Formaggio': 10,
+  'ExtraSauce': 1,
+  'ExtraToppings': 2,
+}
 
 /**
  * Determine the price of the pizza given the pizza and optional extras
@@ -19,8 +19,12 @@ const PRICES = {
  * @returns {number} the price of the pizza
  */
 export function pizzaPrice(pizza, ...extras) {
-  if(!extras || extras.length === 0) return PRICES[pizza];
-  return PRICES[extras.shift()] + pizzaPrice(pizza, ...extras);
+  if(!extras.length){
+    return PRICES[pizza];
+  }else{
+    const currentOption = extras.shift();
+    return PRICES[currentOption] + pizzaPrice(pizza, ...extras);
+  }
 }
 
 /**
@@ -33,5 +37,5 @@ export function pizzaPrice(pizza, ...extras) {
  * @returns {number} the price of the total order
  */
 export function orderPrice(pizzaOrders) {
-  throw new Error('Please implement the orderPrice function');
+  return pizzaOrders.reduce((result, order) => result + pizzaPrice(order.pizza, ...order.extras), 0)
 }
